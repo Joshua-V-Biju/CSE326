@@ -1,0 +1,464 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical guide to local handmade crafts, artisan workshops, government emporiums and fair souvenir prices.">
+  <title>Local Craft Guide | Handmade Souvenir Market</title>
+  <style>
+    :root {
+      --paper: #f7f2e9;
+      --paper-deep: #eee5d5;
+      --ink: #2d2a26;
+      --muted: #6d655d;
+      --terracotta: #a4523d;
+      --terracotta-dark: #7e3d2e;
+      --green: #3d5a4a;
+      --line: #d9cdbb;
+      --white: #fffdf9;
+      --focus: #b87518;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: 1.6;
+    }
+    a { color: var(--terracotta-dark); }
+    a:hover { color: var(--green); }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+    }
+    img { display: block; max-width: 100%; height: auto; }
+
+    header {
+      background: var(--green);
+      color: var(--white);
+      padding: 1.25rem 5vw 1.05rem;
+      border-bottom: 5px solid var(--terracotta);
+    }
+    header p { max-width: 700px; margin: .25rem 0 0; color: #e9e1d5; }
+    h1, h2, h3, h4 { line-height: 1.15; margin-top: 0; }
+    h1 { font-size: clamp(2rem, 5vw, 3.8rem); margin-bottom: .35rem; letter-spacing: -.03em; }
+    h2 { font-size: clamp(1.65rem, 3vw, 2.4rem); color: var(--green); margin-bottom: .75rem; }
+    h3 { font-size: 1.3rem; color: var(--terracotta-dark); margin-bottom: .5rem; }
+    p { margin-top: 0; }
+
+    nav {
+      background: var(--white);
+      border-bottom: 1px solid var(--line);
+      padding: .7rem 5vw;
+      position: sticky;
+      top: 0;
+      z-index: 2;
+    }
+    nav ul { list-style: none; display: flex; flex-wrap: wrap; gap: .35rem 1.3rem; padding: 0; margin: 0; }
+    nav a { display: inline-block; padding: .25rem 0; font-weight: bold; text-decoration: none; }
+
+    main { max-width: 1180px; margin: 0 auto; padding: 2rem 5vw 4rem; }
+    section { scroll-margin-top: 5rem; margin: 0 0 4rem; }
+    .intro {
+      display: grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap: 2rem;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 2.5rem;
+    }
+    .intro p { font-size: 1.15rem; max-width: 62ch; }
+    .intro figure { margin: 0; }
+    .intro img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+    figcaption { color: var(--muted); font-size: .88rem; margin-top: .45rem; }
+
+    .section-lead { max-width: 70ch; color: var(--muted); }
+    .craft-grid, .entry-grid, .directory-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.2rem; margin: 0; }
+    article {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--terracotta);
+      padding: 1.25rem;
+    }
+    article p:last-child { margin-bottom: 0; }
+    article figure { margin: 0 0 1rem; }
+    article figure img { aspect-ratio: 16 / 9; object-fit: cover; }
+    dl { margin: .75rem 0 0; }
+    dt { color: var(--green); font-weight: bold; margin-top: .55rem; }
+    dd { margin: 0; }
+    .entry-grid article { border-top-color: var(--green); }
+    .status { border-left: 3px solid var(--green); padding-left: .75rem; color: var(--muted); }
+    .status strong { color: var(--green); }
+
+    .directory-group { margin-top: 1.4rem; }
+    .directory-grid { grid-template-columns: repeat(2, 1fr); }
+    address { font-style: normal; margin: .75rem 0; }
+    .directory-grid article { border-top-color: var(--green); }
+    .directory-grid article:nth-child(even) { border-top-color: var(--terracotta); }
+
+    .price-list { display: grid; gap: .7rem; margin: 0; }
+    .price-list dl { display: grid; grid-template-columns: minmax(130px, .7fr) 1.8fr; gap: .2rem 1.4rem; border-bottom: 1px solid var(--line); padding-bottom: .8rem; }
+    .price-list dt { grid-row: span 3; margin: 0; font-size: 1.08rem; }
+    .price-list dd { color: var(--muted); }
+    .price-list dd strong { color: var(--ink); }
+    small { color: var(--muted); }
+
+    aside {
+      background: var(--paper-deep);
+      border-left: 5px solid var(--terracotta);
+      padding: 1.25rem 1.5rem;
+      margin: 2.5rem 0 0;
+    }
+    aside ul { margin-bottom: 0; padding-left: 1.2rem; }
+
+    form {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr auto auto;
+      gap: .8rem;
+      align-items: end;
+      background: var(--white);
+      border: 1px solid var(--line);
+      padding: 1.2rem;
+    }
+    label { display: block; font-weight: bold; color: var(--green); margin-bottom: .3rem; }
+    input, select, button {
+      font: inherit;
+      min-height: 2.7rem;
+      border: 1px solid #aa9c8b;
+      border-radius: 0;
+      padding: .45rem .65rem;
+      background: var(--white);
+      color: var(--ink);
+    }
+    button { background: var(--terracotta); border-color: var(--terracotta); color: white; cursor: pointer; font-weight: bold; }
+    button:hover { background: var(--terracotta-dark); }
+    button[type="reset"] { background: transparent; color: var(--terracotta-dark); }
+    #form-message { grid-column: 1 / -1; margin: .2rem 0 0; color: var(--green); }
+    .hidden { display: none !important; }
+
+    footer {
+      background: var(--green);
+      color: var(--white);
+      padding: 2rem 5vw;
+    }
+    footer a { color: #f6d5b7; }
+    footer p { max-width: 60ch; }
+    footer nav { background: transparent; border: 0; padding: 0; position: static; }
+    footer nav ul { gap: .3rem 1rem; }
+
+    @media (max-width: 760px) {
+      nav ul { gap: .25rem .9rem; }
+      .intro, .craft-grid, .entry-grid, .directory-grid { grid-template-columns: 1fr; }
+      .intro { gap: 1.2rem; }
+      form { grid-template-columns: 1fr; }
+      #form-message { grid-column: auto; }
+      .price-list dl { grid-template-columns: 1fr; gap: .1rem; }
+      .price-list dt { grid-row: auto; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Local Craft Guide</h1>
+    <p>Discover authentic handmade crafts, local artisans and fair souvenir prices.</p>
+  </header>
+
+  <nav aria-label="Main navigation">
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#categories">Craft Categories</a></li>
+      <li><a href="#workshops">Artisan Workshops</a></li>
+      <li><a href="#prices">Fair Prices</a></li>
+      <li><a href="#about">About</a></li>
+    </ul>
+  </nav>
+
+  <main id="home">
+    <section class="intro" aria-labelledby="intro-heading">
+      <article>
+        <h2 id="intro-heading">A thoughtful guide to buying handmade</h2>
+        <p>Explore traditional handmade crafts, learn how they are made, and find reliable places to buy them at fair prices. This guide uses sample listings to show what to ask, compare and check before taking a souvenir home.</p>
+        <p><strong>Good buying starts with a good question:</strong> ask who made the item, where the material came from and how the technique was passed on.</p>
+      </article>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" alt="Colourful handwoven textiles displayed in a craft market">
+        <figcaption>Look for the maker's story, not just the lowest price.</figcaption>
+      </figure>
+    </section>
+
+    <section id="categories" aria-labelledby="categories-heading">
+      <h2 id="categories-heading">Explore Craft Categories</h2>
+      <p class="section-lead">These broad categories help visitors recognise common handmade techniques and understand where an item may have come from.</p>
+      <section class="craft-grid" aria-label="Craft category entries">
+        <article data-category="textiles">
+          <h3>Handloom Textiles</h3>
+          <p>Woven cotton, wool and silk pieces made on a hand-operated loom.</p>
+          <dl>
+            <dt>Traditional technique</dt><dd>Warping, shuttle weaving and hand-finishing.</dd>
+            <dt>Region or origin</dt><dd>Sample entry: hill and plains weaving communities.</dd>
+            <dt>Typical examples</dt><dd>Scarves, table runners, shawls and small bags.</dd>
+          </dl>
+        </article>
+        <article data-category="ceramics">
+          <h3>Ceramic Pottery</h3>
+          <p>Useful and decorative clay objects shaped, dried and fired in a kiln.</p>
+          <dl>
+            <dt>Traditional technique</dt><dd>Wheel throwing or hand building with slip decoration.</dd>
+            <dt>Region or origin</dt><dd>Sample entry: village pottery clusters near river clay deposits.</dd>
+            <dt>Typical examples</dt><dd>Cups, oil lamps, bowls and small painted figurines.</dd>
+          </dl>
+        </article>
+        <article data-category="wood">
+          <h3>Wood Carvings</h3>
+          <p>Small objects shaped from locally available wood by carving and sanding.</p>
+          <dl>
+            <dt>Traditional technique</dt><dd>Relief carving, chiselling and natural oil finishing.</dd>
+            <dt>Region or origin</dt><dd>Sample entry: forest-edge craft communities.</dd>
+            <dt>Typical examples</dt><dd>Boxes, birds, utensils and wall panels.</dd>
+          </dl>
+        </article>
+        <article data-category="metal">
+          <h3>Metal Craft</h3>
+          <p>Decorative or household pieces made by shaping, casting or engraving metal.</p>
+          <dl>
+            <dt>Traditional technique</dt><dd>Lost-wax casting, hammering or hand engraving.</dd>
+            <dt>Region or origin</dt><dd>Sample entry: established metalworking neighbourhoods.</dd>
+            <dt>Typical examples</dt><dd>Small bells, trays, lamps and animal figures.</dd>
+          </dl>
+        </article>
+        <article data-category="leather">
+          <h3>Leather Goods</h3>
+          <p>Practical accessories cut, stitched and finished by hand.</p>
+          <dl>
+            <dt>Traditional technique</dt><dd>Pattern cutting, saddle stitching and edge burnishing.</dd>
+            <dt>Region or origin</dt><dd>Sample entry: family-run leather workshops in old market lanes.</dd>
+            <dt>Typical examples</dt><dd>Wallets, belts, sandals and notebook covers.</dd>
+          </dl>
+        </article>
+      </section>
+    </section>
+
+    <section id="featured" aria-labelledby="featured-heading">
+      <h2 id="featured-heading">Featured Artisan Crafts</h2>
+      <p class="section-lead">The entries below are illustrative guide content. Confirm current origin, registration and maker details with the seller before buying.</p>
+      <section class="entry-grid" aria-label="Featured craft entries">
+        <article data-category="textiles">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" alt="Close view of a handwoven textile with geometric patterns">
+            <figcaption>Handloom textile — sample listing</figcaption>
+          </figure>
+          <h3>Indigo Border Shawl</h3>
+          <p><strong>Origin:</strong> Sample entry: a weaving village in the northern foothills.</p>
+          <p><strong>Technique:</strong> Handloom weaving with a narrow supplementary border.</p>
+          <p><strong>History:</strong> The pattern is presented as a local design reference, not as a claim of a single ancient origin.</p>
+          <p class="status"><strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified for this sample listing. <br><strong>Authenticity:</strong> Ask to see the loom, maker name or cooperative receipt.</p>
+        </article>
+        <article data-category="ceramics">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?auto=format&fit=crop&w=900&q=80" alt="Handmade ceramic bowls arranged on a wooden shelf">
+            <figcaption>Wheel-thrown pottery — sample listing</figcaption>
+          </figure>
+          <h3>Terracotta Tea Bowl</h3>
+          <p><strong>Origin:</strong> Sample entry: a pottery cluster known for locally sourced clay.</p>
+          <p><strong>Technique:</strong> Wheel throwing, sun drying and a low-temperature kiln firing.</p>
+          <p><strong>History:</strong> The bowl is described by its making process; no unverified historical date is attached.</p>
+          <p class="status"><strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified for this sample listing. <br><strong>Authenticity:</strong> Check for small variations that reflect hand-making and ask about food-safe glaze.</p>
+        </article>
+        <article data-category="wood">
+          <h3>Carved Neem Bird</h3>
+          <p><strong>Origin:</strong> Sample entry: a family carving workshop near a regional market.</p>
+          <p><strong>Technique:</strong> Hand chiselling, sanding and a light plant-oil finish.</p>
+          <p><strong>History:</strong> A contemporary souvenir inspired by local bird forms.</p>
+          <p class="status"><strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified. <br><strong>Authenticity:</strong> Ask which wood was used and whether it was legally sourced.</p>
+        </article>
+      </section>
+    </section>
+
+    <section id="workshops" aria-labelledby="workshops-heading">
+      <h2 id="workshops-heading">Artisan Workshops and Government Emporiums</h2>
+      <p class="section-lead">The directory below uses clearly marked sample/demo information. Replace it with locally verified listings before publishing.</p>
+
+      <section class="directory-group" aria-labelledby="artisan-heading">
+        <h3 id="artisan-heading">Artisan Workshops</h3>
+        <section class="directory-grid" aria-label="Artisan workshop directory">
+          <article>
+            <h4>Riverside Loom Studio <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Family-run weaving workshop</p>
+            <address>14 Weaver's Lane<br>Old Market District<br>Sampletown</address>
+            <p><strong>Specialties:</strong> Cotton scarves and table runners</p>
+            <p><strong>Fair-price status:</strong> Prices displayed beside each item; cooperative receipt available on request.</p>
+            <p><strong>Opening:</strong> Sample hours: Tuesday–Sunday, 10:00–17:00</p>
+            <a href="#about">Ask the guide team about verifying this listing</a>
+          </article>
+          <article>
+            <h4>Clay Courtyard <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Potter's studio and demonstration space</p>
+            <address>6 Kiln Road<br>South Village<br>Sampletown</address>
+            <p><strong>Specialties:</strong> Small bowls, lamps and painted tiles</p>
+            <p><strong>Fair-price status:</strong> Maker sets prices; visitors can ask for a material and firing explanation.</p>
+            <p><strong>Opening:</strong> Sample hours: Wednesday–Monday, 09:30–16:30</p>
+            <a href="#about">Ask the guide team about verifying this listing</a>
+          </article>
+        </section>
+      </section>
+
+      <section class="directory-group" aria-labelledby="emporium-heading">
+        <h3 id="emporium-heading">Government Emporiums</h3>
+        <section class="directory-grid" aria-label="Government emporium directory">
+          <article>
+            <h4>State Handicrafts Emporium <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Government-supported retail emporium</p>
+            <address>1 Civic Square<br>Central Avenue<br>Sampletown</address>
+            <p><strong>Specialties:</strong> Textiles, woodwork and certified regional products</p>
+            <p><strong>Fair-price status:</strong> Look for printed labels, maker or cooperative information and a receipt.</p>
+            <p><strong>Opening:</strong> Confirm current opening hours with the local tourism office.</p>
+            <a href="#about">Read the verification note</a>
+          </article>
+          <article>
+            <h4>Crafts Council Shop <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Public craft promotion outlet</p>
+            <address>22 Museum Road<br>Heritage Quarter<br>Sampletown</address>
+            <p><strong>Specialties:</strong> Rotating selection from local artisan groups</p>
+            <p><strong>Fair-price status:</strong> Ask whether the current collection has maker documentation.</p>
+            <p><strong>Opening:</strong> Confirm current opening hours before visiting.</p>
+            <a href="#about">Read the verification note</a>
+          </article>
+        </section>
+      </section>
+    </section>
+
+    <section id="prices" aria-labelledby="prices-heading">
+      <h2 id="prices-heading">Souvenir Fair Price Guide</h2>
+      <p class="section-lead">These are benchmark ranges intended to help visitors identify unusually high tourist prices. They are not official or guaranteed prices and should be adjusted for the local market.</p>
+      <section class="price-list" aria-label="Indicative souvenir price benchmarks">
+        <dl>
+          <dt>Handloom textile</dt>
+          <dd><strong>Typical item:</strong> Cotton scarf or runner</dd>
+          <dd><strong>Approximate fair-price range:</strong> 800–2,500 local currency units</dd>
+          <dd><strong>What affects price:</strong> Fibre, length, weave density, dye and maker time. <strong>Advice:</strong> Compare two or three similar pieces and ask whether the item is handwoven.</dd>
+        </dl>
+        <dl>
+          <dt>Small ceramic item</dt>
+          <dd><strong>Typical item:</strong> Cup, bowl or lamp</dd>
+          <dd><strong>Approximate fair-price range:</strong> 250–900 local currency units</dd>
+          <dd><strong>What affects price:</strong> Firing, glaze, detail and breakage-safe packing. <strong>Advice:</strong> Ask whether the glaze is food-safe when relevant.</dd>
+        </dl>
+        <dl>
+          <dt>Wooden carving</dt>
+          <dd><strong>Typical item:</strong> Small bird, box or utensil</dd>
+          <dd><strong>Approximate fair-price range:</strong> 500–2,000 local currency units</dd>
+          <dd><strong>What affects price:</strong> Wood type, size, carving detail and finish. <strong>Advice:</strong> Ask about legal sourcing of the wood.</dd>
+        </dl>
+        <dl>
+          <dt>Metal craft item</dt>
+          <dd><strong>Typical item:</strong> Bell, tray or small lamp</dd>
+          <dd><strong>Approximate fair-price range:</strong> 600–3,000 local currency units</dd>
+          <dd><strong>What affects price:</strong> Metal weight, casting, engraving and polishing. <strong>Advice:</strong> Compare weight and workmanship, not only the shine.</dd>
+        </dl>
+        <dl>
+          <dt>Leather handicraft</dt>
+          <dd><strong>Typical item:</strong> Wallet, belt or notebook cover</dd>
+          <dd><strong>Approximate fair-price range:</strong> 700–2,800 local currency units</dd>
+          <dd><strong>What affects price:</strong> Leather grade, lining, stitching and hardware. <strong>Advice:</strong> Inspect the edges and ask how the leather was treated.</dd>
+        </dl>
+      </section>
+      <p><small>Prices are indicative benchmarks and may vary depending on materials, craftsmanship, size and location.</small></p>
+    </section>
+
+    <aside aria-labelledby="tips-heading">
+      <h2 id="tips-heading">Visitor Tips</h2>
+      <ul>
+        <li>Ask about the craft's origin.</li>
+        <li>Check whether a <abbr title="Geographical Indication">GI</abbr> claim is supported.</li>
+        <li>Compare prices between sellers.</li>
+        <li>Ask whether the item is handmade or factory-produced.</li>
+        <li>Request a receipt when appropriate.</li>
+      </ul>
+    </aside>
+
+    <section id="search" aria-labelledby="search-heading">
+      <h2 id="search-heading">Search the Guide</h2>
+      <p class="section-lead">Filter the category and featured craft entries by name or description.</p>
+      <form id="guide-form">
+        <p>
+          <label for="craft-search">Craft name or keyword</label>
+          <input type="search" id="craft-search" name="craft-search" placeholder="e.g. pottery">
+        </p>
+        <p>
+          <label for="craft-category">Category</label>
+          <select id="craft-category" name="craft-category">
+            <option value="all">All categories</option>
+            <option value="textiles">Handloom Textiles</option>
+            <option value="ceramics">Ceramic Pottery</option>
+            <option value="wood">Wood Carvings</option>
+            <option value="metal">Metal Craft</option>
+            <option value="leather">Leather Goods</option>
+          </select>
+        </p>
+        <button type="submit">Apply filter</button>
+        <button type="reset">Clear</button>
+        <p id="form-message" role="status" aria-live="polite">Showing all guide entries.</p>
+      </form>
+    </section>
+
+    <section id="about" aria-labelledby="about-heading">
+      <h2 id="about-heading">About this guide</h2>
+      <p>This student-built demonstration focuses on clear semantic structure, accessible controls and practical buying advice. Addresses, prices, GI references and directory names marked as <em>sample listing</em> are placeholders and should be verified with an official tourism office, craft council or the artisan before use.</p>
+    </section>
+  </main>
+
+  <footer>
+    <h2>Local Craft Guide</h2>
+    <p>Discover authentic handmade crafts, local artisans and fair souvenir prices.</p>
+    <address>Email: <a href="mailto:guide@example.com">guide@example.com</a><br>Visitor information desk: Sampletown Cultural Market</address>
+    <nav aria-label="Footer navigation">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Craft Categories</a></li>
+        <li><a href="#workshops">Artisan Workshops</a></li>
+        <li><a href="#prices">Fair Prices</a></li>
+      </ul>
+    </nav>
+    <p><small>© 2026 Local Craft Guide. Demonstration content for educational use.</small></p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('guide-form');
+    const search = document.getElementById('craft-search');
+    const category = document.getElementById('craft-category');
+    const message = document.getElementById('form-message');
+    const entries = document.querySelectorAll('#categories article, #featured article');
+
+    function applyFilter(event) {
+      if (event) event.preventDefault();
+      const term = search.value.trim().toLowerCase();
+      const selected = category.value;
+      let visible = 0;
+      entries.forEach((entry) => {
+        const matchesText = !term || entry.textContent.toLowerCase().includes(term);
+        const matchesCategory = selected === 'all' || entry.dataset.category === selected;
+        const show = matchesText && matchesCategory;
+        entry.classList.toggle('hidden', !show);
+        if (show) visible += 1;
+      });
+      message.textContent = visible + (visible === 1 ? ' guide entry' : ' guide entries') + ' shown.';
+    }
+
+    form.addEventListener('submit', applyFilter);
+    search.addEventListener('input', applyFilter);
+    category.addEventListener('change', applyFilter);
+    form.addEventListener('reset', () => {
+      window.setTimeout(() => {
+        entries.forEach((entry) => entry.classList.remove('hidden'));
+        message.textContent = 'Showing all guide entries.';
+      }, 0);
+    });
+  </script>
+</body>
+</html>
