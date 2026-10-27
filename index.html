@@ -1,0 +1,1559 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A practical guide to local handmade crafts, artisan workshops, government emporiums and fair souvenir prices.">
+  <title>Local Craft Guide | Handmade Souvenir Market</title>
+
+  <!-- Google Fonts: Editorial Serif + Clean Modern Sans -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+  <style>
+    /* ==========================================================================
+       Design System & CSS Custom Properties
+       Artisanal Earthy Palette: Warm Parchment, Terracotta, Forest Green
+       ========================================================================== */
+    :root {
+      /* Surface & Paper Backgrounds */
+      --paper: #FAF6F0;
+      --paper-surface: #FFFFFF;
+      --paper-card: #FCFAF7;
+      --paper-deep: #F2EAE0;
+      --paper-muted: #EBE1D4;
+
+      /* Ink & Typography */
+      --ink: #2C2621;
+      --ink-soft: #443C36;
+      --muted: #6E645A;
+      --muted-light: #948A80;
+
+      /* Primary Theme Colors: Terracotta (Warm Earth) */
+      --terracotta: #A84E34;
+      --terracotta-dark: #843922;
+      --terracotta-light: #F7EDE8;
+      --terracotta-border: #E8CFC6;
+
+      /* Secondary Theme Colors: Forest Green (Heritage & Trust) */
+      --green: #2B4D3C;
+      --green-dark: #1E372B;
+      --green-light: #EDF3EF;
+      --green-border: #C1D5C8;
+
+      /* Structural Accents */
+      --line: #E2D7C8;
+      --line-light: #EFE9DE;
+      --white: #FFFFFF;
+      --focus: #BA6E17;
+
+      /* Elevation & Shadows */
+      --shadow-xs: 0 1px 3px rgba(44, 38, 33, 0.05);
+      --shadow-sm: 0 3px 8px rgba(44, 38, 33, 0.06);
+      --shadow-md: 0 8px 24px -4px rgba(44, 38, 33, 0.08), 0 2px 6px -1px rgba(44, 38, 33, 0.04);
+      --shadow-hover: 0 14px 30px -4px rgba(44, 38, 33, 0.12), 0 4px 10px -2px rgba(44, 38, 33, 0.06);
+
+      /* Border Radii */
+      --radius-sm: 6px;
+      --radius-md: 10px;
+      --radius-lg: 16px;
+      --radius-pill: 9999px;
+
+      /* Smooth Transitions */
+      --transition: all 0.24s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* ==========================================================================
+       Reset & Base Styles
+       ========================================================================== */
+    *, *::before, *::after {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+      font-size: 1rem;
+      line-height: 1.65;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    a {
+      color: var(--terracotta);
+      text-decoration: underline;
+      text-decoration-thickness: 1px;
+      text-underline-offset: 3px;
+      transition: var(--transition);
+    }
+
+    a:hover {
+      color: var(--terracotta-dark);
+      text-decoration-thickness: 2px;
+    }
+
+    /* Accessible Focus Ring */
+    a:focus-visible,
+    button:focus-visible,
+    input:focus-visible,
+    select:focus-visible {
+      outline: 3px solid var(--focus);
+      outline-offset: 3px;
+      border-radius: var(--radius-sm);
+    }
+
+    /* ==========================================================================
+       Typography Hierarchy
+       ========================================================================== */
+    h1, h2, h3, h4 {
+      font-family: 'Playfair Display', Georgia, serif;
+      line-height: 1.2;
+      margin-top: 0;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    h1 {
+      font-size: clamp(2.3rem, 5vw, 3.6rem);
+      letter-spacing: -0.025em;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: clamp(1.7rem, 3.2vw, 2.3rem);
+      color: var(--green);
+      letter-spacing: -0.015em;
+      margin-bottom: 0.65rem;
+    }
+
+    h3 {
+      font-size: 1.35rem;
+      color: var(--terracotta-dark);
+      margin-bottom: 0.5rem;
+    }
+
+    h4 {
+      font-size: 1.15rem;
+      margin-bottom: 0.4rem;
+    }
+
+    p {
+      margin-top: 0;
+      margin-bottom: 1rem;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--terracotta);
+      margin-bottom: 0.4rem;
+    }
+
+    .section-lead {
+      max-width: 68ch;
+      color: var(--muted);
+      font-size: 1.05rem;
+      line-height: 1.6;
+      margin-bottom: 2rem;
+    }
+
+    /* ==========================================================================
+       Header & Brand Banner
+       ========================================================================== */
+    header {
+      background: linear-gradient(135deg, var(--green-dark) 0%, var(--green) 100%);
+      color: var(--white);
+      padding: 3rem 5vw 2.5rem;
+      border-bottom: 5px solid var(--terracotta);
+      position: relative;
+      box-shadow: 0 4px 12px rgba(30, 55, 43, 0.15);
+    }
+
+    .header-content {
+      max-width: 1180px;
+      margin: 0 auto;
+    }
+
+    .header-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.45rem;
+      background: rgba(255, 255, 255, 0.12);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: var(--radius-pill);
+      padding: 0.3rem 0.85rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      color: #E9ECE9;
+      margin-bottom: 0.85rem;
+    }
+
+    .header-badge svg {
+      width: 14px;
+      height: 14px;
+      fill: currentColor;
+    }
+
+    header h1 {
+      color: var(--white);
+    }
+
+    header p {
+      max-width: 650px;
+      margin: 0.25rem 0 0;
+      color: #E2ECE5;
+      font-size: 1.15rem;
+    }
+
+    /* ==========================================================================
+       Navigation Bar (Sticky with Glassmorphism)
+       ========================================================================== */
+    nav {
+      background: rgba(255, 253, 249, 0.94);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      padding: 0.6rem 5vw;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      box-shadow: var(--shadow-xs);
+    }
+
+    .nav-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.4rem 0.6rem;
+      padding: 0;
+      margin: 0;
+    }
+
+    nav a {
+      display: inline-block;
+      padding: 0.45rem 0.85rem;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+      position: relative;
+    }
+
+    nav a:hover {
+      color: var(--terracotta);
+      background: var(--terracotta-light);
+    }
+
+    /* Quick jump search button in nav */
+    .nav-search-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: var(--paper-deep);
+      border: 1px solid var(--line);
+      color: var(--ink);
+      padding: 0.4rem 0.85rem;
+      border-radius: var(--radius-pill);
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    .nav-search-btn:hover {
+      background: var(--white);
+      border-color: var(--terracotta);
+      color: var(--terracotta);
+    }
+
+    /* ==========================================================================
+       Main Content Container & Section Rhythm
+       ========================================================================== */
+    main {
+      max-width: 1180px;
+      margin: 0 auto;
+      padding: 2.5rem 5vw 5rem;
+    }
+
+    section {
+      scroll-margin-top: 5.5rem;
+      margin: 0 0 4.5rem;
+    }
+
+    /* ==========================================================================
+       Intro / Hero Section
+       ========================================================================== */
+    .intro {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 2.5rem;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      padding-bottom: 3rem;
+    }
+
+    .intro article {
+      background: transparent;
+      border: none;
+      padding: 0;
+      box-shadow: none;
+    }
+
+    .intro article:hover {
+      transform: none;
+      box-shadow: none;
+    }
+
+    .intro h2 {
+      font-size: clamp(1.9rem, 3.5vw, 2.6rem);
+      margin-bottom: 1rem;
+      line-height: 1.18;
+    }
+
+    .intro p {
+      font-size: 1.1rem;
+      color: var(--ink-soft);
+      max-width: 60ch;
+      line-height: 1.7;
+    }
+
+    .intro-callout {
+      background: var(--paper-deep);
+      border-left: 4px solid var(--terracotta);
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      padding: 1.1rem 1.3rem;
+      margin-top: 1.25rem;
+      font-size: 0.98rem;
+    }
+
+    .intro-callout strong {
+      color: var(--terracotta-dark);
+      display: block;
+      margin-bottom: 0.2rem;
+    }
+
+    .intro figure {
+      margin: 0;
+      background: var(--paper-surface);
+      border-radius: var(--radius-lg);
+      padding: 0.6rem;
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow-md);
+      transition: var(--transition);
+    }
+
+    .intro figure:hover {
+      box-shadow: var(--shadow-hover);
+    }
+
+    .intro img {
+      width: 100%;
+      aspect-ratio: 4 / 3;
+      object-fit: cover;
+      border-radius: var(--radius-md);
+    }
+
+    figcaption {
+      color: var(--muted);
+      font-size: 0.88rem;
+      font-style: italic;
+      margin-top: 0.65rem;
+      padding: 0 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    figcaption::before {
+      content: '✦';
+      color: var(--terracotta);
+      font-style: normal;
+    }
+
+    /* ==========================================================================
+       Card Grids & Article Components
+       ========================================================================== */
+    .craft-grid,
+    .entry-grid,
+    .directory-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.6rem;
+      margin: 0;
+    }
+
+    /* Base Card Styling */
+    article {
+      background: var(--paper-surface);
+      border: 1px solid var(--line);
+      border-top: 4px solid var(--terracotta);
+      border-radius: var(--radius-md);
+      padding: 1.5rem;
+      box-shadow: var(--shadow-xs);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+    }
+
+    article:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-hover);
+      border-color: #D6C8B4;
+    }
+
+    article figure {
+      margin: -1.5rem -1.5rem 1.25rem -1.5rem;
+      overflow: hidden;
+      border-radius: var(--radius-md) var(--radius-md) 0 0;
+      background: var(--paper-deep);
+    }
+
+    article figure img {
+      width: 100%;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    article:hover figure img {
+      transform: scale(1.03);
+    }
+
+    article figcaption {
+      padding: 0.45rem 1rem;
+      font-size: 0.8rem;
+      background: var(--paper-card);
+      border-bottom: 1px solid var(--line-light);
+    }
+
+    /* Card Category Badges */
+    .card-badge {
+      align-self: flex-start;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.74rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      background: var(--terracotta-light);
+      color: var(--terracotta-dark);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Card Definition Lists (Structured Metadata) */
+    dl {
+      margin: 1rem 0 0;
+      display: flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      font-size: 0.94rem;
+      border-top: 1px dashed var(--line);
+      padding-top: 0.85rem;
+      margin-top: auto;
+    }
+
+    .dl-item {
+      display: block;
+    }
+
+    dt {
+      color: var(--green);
+      font-weight: 700;
+      font-size: 0.82rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 0.1rem;
+    }
+
+    dd {
+      margin: 0;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    /* Featured Entry Top Border & Status Box */
+    .entry-grid article {
+      border-top-color: var(--green);
+    }
+
+    .entry-grid .card-badge {
+      background: var(--green-light);
+      color: var(--green-dark);
+    }
+
+    .status {
+      background: var(--green-light);
+      border-left: 3px solid var(--green);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 0.75rem 1rem;
+      margin-top: 1rem;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    .status strong {
+      color: var(--green-dark);
+    }
+
+    /* ==========================================================================
+       Directory Section (Workshops & Emporiums)
+       ========================================================================== */
+    .directory-group {
+      margin-top: 2rem;
+    }
+
+    .directory-group h3 {
+      font-size: 1.45rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1.2rem;
+      border-bottom: 2px solid var(--line);
+      padding-bottom: 0.5rem;
+    }
+
+    .directory-grid article {
+      border-top: 4px solid var(--green);
+      background: var(--paper-surface);
+    }
+
+    .directory-grid article:nth-child(even) {
+      border-top-color: var(--terracotta);
+    }
+
+    .directory-grid h4 {
+      color: var(--ink);
+      font-size: 1.25rem;
+    }
+
+    .directory-grid h4 small {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: var(--paper-deep);
+      padding: 0.2rem 0.5rem;
+      border-radius: var(--radius-pill);
+      vertical-align: middle;
+      margin-left: 0.35rem;
+    }
+
+    address {
+      font-style: normal;
+      background: var(--paper-card);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-sm);
+      padding: 0.65rem 0.85rem;
+      margin: 0.85rem 0;
+      font-size: 0.9rem;
+      line-height: 1.5;
+      color: var(--ink-soft);
+    }
+
+    .directory-link {
+      margin-top: auto;
+      padding-top: 1rem;
+      font-size: 0.9rem;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.3rem;
+      text-decoration: none;
+    }
+
+    .directory-link:hover {
+      text-decoration: underline;
+    }
+
+    /* ==========================================================================
+       Souvenir Fair Price Guide
+       ========================================================================== */
+    .price-list {
+      display: grid;
+      gap: 1.25rem;
+      margin: 0;
+    }
+
+    .price-card {
+      background: var(--paper-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.4rem 1.6rem;
+      box-shadow: var(--shadow-xs);
+      transition: var(--transition);
+    }
+
+    .price-card:hover {
+      border-color: #D3C4B0;
+      box-shadow: var(--shadow-sm);
+      transform: translateY(-2px);
+    }
+
+    .price-card dl {
+      display: grid;
+      grid-template-columns: minmax(180px, 1.2fr) minmax(180px, 1.4fr) 2.4fr;
+      gap: 1.2rem 2rem;
+      align-items: start;
+      border-top: none;
+      padding-top: 0;
+      margin: 0;
+    }
+
+    .price-card dt {
+      grid-row: span 3;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--ink);
+      text-transform: none;
+      letter-spacing: normal;
+      margin: 0;
+    }
+
+    .price-range-badge {
+      display: inline-flex;
+      align-items: center;
+      background: var(--terracotta-light);
+      border: 1px solid var(--terracotta-border);
+      color: var(--terracotta-dark);
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      font-weight: 700;
+      font-size: 0.92rem;
+      padding: 0.35rem 0.75rem;
+      border-radius: var(--radius-pill);
+      margin-top: 0.25rem;
+    }
+
+    .price-advice-box {
+      background: var(--paper-deep);
+      border-radius: var(--radius-sm);
+      padding: 0.75rem 1rem;
+      font-size: 0.88rem;
+      color: var(--ink-soft);
+      border-left: 3px solid var(--muted-light);
+    }
+
+    .price-note {
+      margin-top: 1.5rem;
+      padding: 0.85rem 1.2rem;
+      background: var(--paper-deep);
+      border-radius: var(--radius-md);
+      font-size: 0.9rem;
+      color: var(--muted);
+      border: 1px solid var(--line);
+    }
+
+    /* ==========================================================================
+       Visitor Tips Aside Component
+       ========================================================================== */
+    aside {
+      background: linear-gradient(145deg, var(--paper-deep) 0%, #EFE5D7 100%);
+      border: 1px solid var(--line);
+      border-left: 6px solid var(--terracotta);
+      border-radius: var(--radius-md);
+      padding: 1.8rem 2rem;
+      margin: 3.5rem 0;
+      box-shadow: var(--shadow-sm);
+    }
+
+    aside h2 {
+      color: var(--terracotta-dark);
+      font-size: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+      margin-bottom: 1rem;
+    }
+
+    aside ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 0.85rem 1.5rem;
+    }
+
+    aside li {
+      position: relative;
+      padding-left: 1.8rem;
+      font-size: 0.98rem;
+      color: var(--ink-soft);
+      line-height: 1.5;
+    }
+
+    aside li::before {
+      content: '✓';
+      position: absolute;
+      left: 0;
+      top: 0.05rem;
+      color: var(--terracotta);
+      font-weight: 800;
+      font-size: 1.1rem;
+    }
+
+    /* ==========================================================================
+       Interactive Search & Filter Toolbar
+       ========================================================================== */
+    .search-section {
+      background: var(--paper-surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      box-shadow: var(--shadow-md);
+    }
+
+    form {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr auto auto;
+      gap: 1rem;
+      align-items: flex-end;
+      background: var(--paper-card);
+      border: 1px solid var(--line-light);
+      border-radius: var(--radius-md);
+      padding: 1.4rem;
+    }
+
+    form p {
+      margin: 0;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: var(--green);
+      margin-bottom: 0.45rem;
+    }
+
+    input, select, button {
+      font: inherit;
+      height: 2.85rem;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.85rem;
+      background: var(--white);
+      color: var(--ink);
+      transition: var(--transition);
+      width: 100%;
+    }
+
+    input:focus, select:focus {
+      border-color: var(--terracotta);
+      box-shadow: 0 0 0 3px var(--terracotta-light);
+      outline: none;
+    }
+
+    /* Action Buttons */
+    button {
+      width: auto;
+      padding: 0 1.4rem;
+      font-weight: 700;
+      font-size: 0.92rem;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.4rem;
+      border-radius: var(--radius-sm);
+      white-space: nowrap;
+    }
+
+    button[type="submit"] {
+      background: var(--terracotta);
+      border-color: var(--terracotta);
+      color: var(--white);
+      box-shadow: var(--shadow-xs);
+    }
+
+    button[type="submit"]:hover {
+      background: var(--terracotta-dark);
+      border-color: var(--terracotta-dark);
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    button[type="reset"] {
+      background: transparent;
+      border-color: var(--line);
+      color: var(--ink-soft);
+    }
+
+    button[type="reset"]:hover {
+      background: var(--paper-deep);
+      color: var(--terracotta);
+      border-color: var(--terracotta-border);
+    }
+
+    #form-message {
+      grid-column: 1 / -1;
+      margin: 0.5rem 0 0;
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--green);
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* ==========================================================================
+       About Section
+       ========================================================================== */
+    .about-card {
+      background: var(--paper-card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.8rem 2rem;
+    }
+
+    .about-badge {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--green);
+      background: var(--green-light);
+      padding: 0.25rem 0.65rem;
+      border-radius: var(--radius-pill);
+      margin-bottom: 0.75rem;
+    }
+
+    /* ==========================================================================
+       Footer Component
+       ========================================================================== */
+    footer {
+      background: linear-gradient(180deg, var(--green) 0%, var(--green-dark) 100%);
+      color: var(--white);
+      padding: 3.5rem 5vw 2.5rem;
+      border-top: 4px solid var(--terracotta);
+    }
+
+    .footer-container {
+      max-width: 1180px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 2.5rem;
+      align-items: start;
+    }
+
+    footer h2 {
+      color: var(--white);
+      font-size: 1.7rem;
+      margin-bottom: 0.5rem;
+    }
+
+    footer p {
+      max-width: 55ch;
+      color: #DFE8E2;
+      font-size: 0.98rem;
+    }
+
+    footer address {
+      background: rgba(0, 0, 0, 0.15);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #E2ECE5;
+      margin: 1.2rem 0;
+      border-radius: var(--radius-md);
+    }
+
+    footer address a {
+      color: #F8D9C4;
+      text-decoration-color: rgba(248, 217, 196, 0.4);
+    }
+
+    footer address a:hover {
+      color: #FFFFFF;
+      text-decoration-color: #FFFFFF;
+    }
+
+    footer nav {
+      background: transparent;
+      border: 0;
+      padding: 0;
+      position: static;
+      box-shadow: none;
+      backdrop-filter: none;
+    }
+
+    footer nav ul {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.65rem;
+    }
+
+    footer nav a {
+      color: #E2ECE5;
+      padding: 0.25rem 0;
+      font-size: 0.96rem;
+      font-weight: 500;
+    }
+
+    footer nav a:hover {
+      color: #F8D9C4;
+      background: transparent;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      max-width: 1180px;
+      margin: 2.5rem auto 0;
+      padding-top: 1.5rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 1rem;
+      font-size: 0.85rem;
+      color: #B8C7BE;
+    }
+
+    .footer-bottom small {
+      color: inherit;
+    }
+
+    /* ==========================================================================
+       Responsive Media Queries
+       ========================================================================== */
+    @media (max-width: 900px) {
+      .intro {
+        grid-template-columns: 1fr;
+        gap: 1.8rem;
+      }
+      .price-card dl {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+      .price-card dt {
+        grid-row: auto;
+      }
+      .footer-container {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      main {
+        padding: 1.8rem 4vw 3.5rem;
+      }
+      header {
+        padding: 2.2rem 4vw 1.8rem;
+      }
+      .nav-container {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+      }
+      nav ul {
+        gap: 0.25rem 0.5rem;
+      }
+      .craft-grid, .entry-grid, .directory-grid {
+        grid-template-columns: 1fr;
+      }
+      form {
+        grid-template-columns: 1fr;
+      }
+      #form-message {
+        grid-column: auto;
+      }
+    }
+
+    /* Print Optimization for Academic Submissions */
+    @media print {
+      nav, .search-section, button {
+        display: none !important;
+      }
+      body {
+        background: #fff;
+        color: #000;
+        font-size: 11pt;
+      }
+      header, footer {
+        background: transparent !important;
+        color: #000 !important;
+        border-bottom: 2px solid #000;
+      }
+      article, .price-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ccc;
+      }
+    }
+
+    /* Respect reduced-motion preferences */
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Main Landmark: Header -->
+  <header>
+    <div class="header-content">
+      <div class="header-badge">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2L2 7l10 5 10-5-10-5zm0 8.5L4.5 7 12 3.25 19.5 7 12 10.5zm0 3L3.5 9.25l-1.5.75L12 15l10-5-1.5-.75L12 13.5zm0 4.5L3.5 13.75l-1.5.75L12 19.5l10-5-1.5-.75L12 18z"/></svg>
+        <span>Curated Heritage & Marketplace</span>
+      </div>
+      <h1>Local Craft Guide</h1>
+      <p>Discover authentic handmade crafts, verified artisan workshops and fair souvenir benchmark prices.</p>
+    </div>
+  </header>
+
+  <!-- Main Landmark: Navigation -->
+  <nav aria-label="Main navigation">
+    <div class="nav-container">
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#categories">Craft Categories</a></li>
+        <li><a href="#featured">Featured Crafts</a></li>
+        <li><a href="#workshops">Artisan Workshops</a></li>
+        <li><a href="#prices">Fair Prices</a></li>
+        <li><a href="#about">About</a></li>
+      </ul>
+      <a href="#search" class="nav-search-btn" aria-label="Jump to search and filters">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+        <span>Search Guide</span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Main Landmark: Main Content -->
+  <main id="home">
+
+    <!-- Section 1: Intro / Hero -->
+    <section class="intro" aria-labelledby="intro-heading">
+      <article>
+        <span class="eyebrow">Practical Traveler Advice</span>
+        <h2 id="intro-heading">A thoughtful guide to buying handmade</h2>
+        <p>Explore traditional handmade crafts, learn how they are made, and find reliable places to buy them at fair prices. This guide uses sample listings to show what to ask, compare and check before taking a souvenir home.</p>
+        <div class="intro-callout">
+          <strong>Good buying starts with a good question:</strong>
+          <span>Ask who made the item, where the material was harvested, and how the technique was passed down through generations.</span>
+        </div>
+      </article>
+      <figure>
+        <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" alt="Colourful handwoven textiles displayed in a vibrant craft market" loading="lazy">
+        <figcaption>Look for the maker's story, not just the lowest price tag.</figcaption>
+      </figure>
+    </section>
+
+    <!-- Section 2: Craft Categories -->
+    <section id="categories" aria-labelledby="categories-heading">
+      <span class="eyebrow">Traditional Disciplines</span>
+      <h2 id="categories-heading">Explore Craft Categories</h2>
+      <p class="section-lead">These broad categories help visitors recognise common handmade techniques and understand where an item may have come from.</p>
+      
+      <div class="craft-grid" role="region" aria-label="Craft category entries">
+        <article data-category="textiles">
+          <span class="card-badge">Textiles</span>
+          <h3>Handloom Textiles</h3>
+          <p>Woven cotton, wool and silk pieces made on a traditional hand-operated loom.</p>
+          <dl>
+            <div class="dl-item">
+              <dt>Traditional technique</dt>
+              <dd>Warping, shuttle weaving and hand-finishing.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Region or origin</dt>
+              <dd>Sample entry: hill and plains weaving communities.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Typical examples</dt>
+              <dd>Scarves, table runners, shawls and small bags.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article data-category="ceramics">
+          <span class="card-badge">Ceramics</span>
+          <h3>Ceramic Pottery</h3>
+          <p>Useful and decorative clay objects shaped, dried and fired in a high-heat kiln.</p>
+          <dl>
+            <div class="dl-item">
+              <dt>Traditional technique</dt>
+              <dd>Wheel throwing or hand building with slip decoration.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Region or origin</dt>
+              <dd>Sample entry: village pottery clusters near river clay deposits.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Typical examples</dt>
+              <dd>Cups, oil lamps, bowls and small painted figurines.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article data-category="wood">
+          <span class="card-badge">Woodwork</span>
+          <h3>Wood Carvings</h3>
+          <p>Small objects shaped from locally available wood by skilled carving and sanding.</p>
+          <dl>
+            <div class="dl-item">
+              <dt>Traditional technique</dt>
+              <dd>Relief carving, chiselling and natural oil finishing.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Region or origin</dt>
+              <dd>Sample entry: forest-edge craft communities.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Typical examples</dt>
+              <dd>Boxes, birds, utensils and wall panels.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article data-category="metal">
+          <span class="card-badge">Metalwork</span>
+          <h3>Metal Craft</h3>
+          <p>Decorative or household pieces made by shaping, casting or hand engraving metal.</p>
+          <dl>
+            <div class="dl-item">
+              <dt>Traditional technique</dt>
+              <dd>Lost-wax casting, hammering or hand engraving.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Region or origin</dt>
+              <dd>Sample entry: established metalworking neighbourhoods.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Typical examples</dt>
+              <dd>Small bells, trays, lamps and animal figures.</dd>
+            </div>
+          </dl>
+        </article>
+
+        <article data-category="leather">
+          <span class="card-badge">Leatherwork</span>
+          <h3>Leather Goods</h3>
+          <p>Practical accessories cut, stitched and burnished meticulously by hand.</p>
+          <dl>
+            <div class="dl-item">
+              <dt>Traditional technique</dt>
+              <dd>Pattern cutting, saddle stitching and edge burnishing.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Region or origin</dt>
+              <dd>Sample entry: family-run leather workshops in old market lanes.</dd>
+            </div>
+            <div class="dl-item">
+              <dt>Typical examples</dt>
+              <dd>Wallets, belts, sandals and notebook covers.</dd>
+            </div>
+          </dl>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 3: Featured Artisan Crafts -->
+    <section id="featured" aria-labelledby="featured-heading">
+      <span class="eyebrow">Curated Showcase</span>
+      <h2 id="featured-heading">Featured Artisan Crafts</h2>
+      <p class="section-lead">The entries below are illustrative guide content. Confirm current origin, registration and maker details with the seller before buying.</p>
+      
+      <div class="entry-grid" role="region" aria-label="Featured craft entries">
+        <article data-category="textiles">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1610701596007-11502861dcfa?auto=format&fit=crop&w=900&q=80" alt="Close view of a handwoven textile with geometric patterns" loading="lazy">
+            <figcaption>Handloom textile — sample listing</figcaption>
+          </figure>
+          <span class="card-badge">Textiles</span>
+          <h3>Indigo Border Shawl</h3>
+          <p><strong>Origin:</strong> Sample entry: a weaving village in the northern foothills.</p>
+          <p><strong>Technique:</strong> Handloom weaving with a narrow supplementary border.</p>
+          <p><strong>History:</strong> The pattern is presented as a local design reference, not as a claim of a single ancient origin.</p>
+          <div class="status">
+            <strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified for this sample listing. <br>
+            <strong>Authenticity Tip:</strong> Ask to see the loom, maker name or cooperative receipt.
+          </div>
+        </article>
+
+        <article data-category="ceramics">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1610701596061-2ecf227e85b2?auto=format&fit=crop&w=900&q=80" alt="Handmade ceramic bowls arranged on a wooden shelf" loading="lazy">
+            <figcaption>Wheel-thrown pottery — sample listing</figcaption>
+          </figure>
+          <span class="card-badge">Ceramics</span>
+          <h3>Terracotta Tea Bowl</h3>
+          <p><strong>Origin:</strong> Sample entry: a pottery cluster known for locally sourced clay.</p>
+          <p><strong>Technique:</strong> Wheel throwing, sun drying and a low-temperature kiln firing.</p>
+          <p><strong>History:</strong> The bowl is described by its making process; no unverified historical date is attached.</p>
+          <div class="status">
+            <strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified for this sample listing. <br>
+            <strong>Authenticity Tip:</strong> Check for subtle hand variations and inquire about food-safe glaze.
+          </div>
+        </article>
+
+        <article data-category="wood">
+          <figure>
+            <img src="https://images.unsplash.com/photo-1544816155-12df9643f363?auto=format&fit=crop&w=900&q=80" alt="Handmade carved wooden art piece" loading="lazy">
+            <figcaption>Hand-carved woodwork — sample listing</figcaption>
+          </figure>
+          <span class="card-badge">Woodwork</span>
+          <h3>Carved Neem Bird</h3>
+          <p><strong>Origin:</strong> Sample entry: a family carving workshop near a regional market.</p>
+          <p><strong>Technique:</strong> Hand chiselling, sanding and a light plant-oil finish.</p>
+          <p><strong>History:</strong> A contemporary souvenir inspired by indigenous bird forms.</p>
+          <div class="status">
+            <strong><abbr title="Geographical Indication">GI</abbr> Status:</strong> Not specified. <br>
+            <strong>Authenticity Tip:</strong> Ask which wood species was used and verify ethical sourcing.
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Section 4: Artisan Workshops and Government Emporiums -->
+    <section id="workshops" aria-labelledby="workshops-heading">
+      <span class="eyebrow">Verified Locations</span>
+      <h2 id="workshops-heading">Artisan Workshops and Government Emporiums</h2>
+      <p class="section-lead">The directory below uses clearly marked sample/demo information. Replace it with locally verified listings before publishing.</p>
+
+      <div class="directory-group" aria-labelledby="artisan-heading">
+        <h3 id="artisan-heading">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+          <span>Artisan Workshops</span>
+        </h3>
+        <div class="directory-grid" role="region" aria-label="Artisan workshop directory">
+          <article>
+            <h4>Riverside Loom Studio <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Family-run weaving workshop</p>
+            <address>
+              14 Weaver's Lane<br>
+              Old Market District<br>
+              Sampletown
+            </address>
+            <p><strong>Specialties:</strong> Cotton scarves and table runners</p>
+            <p><strong>Fair-price status:</strong> Prices displayed beside each item; cooperative receipt available on request.</p>
+            <p><strong>Opening:</strong> Sample hours: Tuesday–Sunday, 10:00–17:00</p>
+            <a href="#about" class="directory-link">Ask the guide team about verifying this listing &rarr;</a>
+          </article>
+
+          <article>
+            <h4>Clay Courtyard <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Potter's studio and demonstration space</p>
+            <address>
+              6 Kiln Road<br>
+              South Village<br>
+              Sampletown
+            </address>
+            <p><strong>Specialties:</strong> Small bowls, lamps and painted tiles</p>
+            <p><strong>Fair-price status:</strong> Maker sets prices; visitors can ask for a material and firing explanation.</p>
+            <p><strong>Opening:</strong> Sample hours: Wednesday–Monday, 09:30–16:30</p>
+            <a href="#about" class="directory-link">Ask the guide team about verifying this listing &rarr;</a>
+          </article>
+        </div>
+      </div>
+
+      <div class="directory-group" aria-labelledby="emporium-heading">
+        <h3 id="emporium-heading">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+          <span>Government Emporiums</span>
+        </h3>
+        <div class="directory-grid" role="region" aria-label="Government emporium directory">
+          <article>
+            <h4>State Handicrafts Emporium <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Government-supported retail emporium</p>
+            <address>
+              1 Civic Square<br>
+              Central Avenue<br>
+              Sampletown
+            </address>
+            <p><strong>Specialties:</strong> Textiles, woodwork and certified regional products</p>
+            <p><strong>Fair-price status:</strong> Look for printed labels, maker or cooperative information and a receipt.</p>
+            <p><strong>Opening:</strong> Confirm current opening hours with the local tourism office.</p>
+            <a href="#about" class="directory-link">Read the verification note &rarr;</a>
+          </article>
+
+          <article>
+            <h4>Crafts Council Shop <small>(sample listing)</small></h4>
+            <p><strong>Type:</strong> Public craft promotion outlet</p>
+            <address>
+              22 Museum Road<br>
+              Heritage Quarter<br>
+              Sampletown
+            </address>
+            <p><strong>Specialties:</strong> Rotating selection from local artisan groups</p>
+            <p><strong>Fair-price status:</strong> Ask whether the current collection has maker documentation.</p>
+            <p><strong>Opening:</strong> Confirm current opening hours before visiting.</p>
+            <a href="#about" class="directory-link">Read the verification note &rarr;</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- Section 5: Souvenir Fair Price Guide -->
+    <section id="prices" aria-labelledby="prices-heading">
+      <span class="eyebrow">Value Benchmarks</span>
+      <h2 id="prices-heading">Souvenir Fair Price Guide</h2>
+      <p class="section-lead">These are benchmark ranges intended to help visitors identify unusually inflated tourist prices. They are not official or guaranteed prices and should be adjusted for the local market.</p>
+      
+      <div class="price-list" role="region" aria-label="Indicative souvenir price benchmarks">
+        <div class="price-card">
+          <dl>
+            <dt>Handloom textile</dt>
+            <div>
+              <dd><strong>Typical item:</strong> Cotton scarf or runner</dd>
+              <dd><span class="price-range-badge">800–2,500 local currency units</span></dd>
+            </div>
+            <div>
+              <div class="price-advice-box">
+                <strong>What affects price:</strong> Fibre, length, weave density, dye and maker time.<br>
+                <strong>Advice:</strong> Compare two or three similar pieces and ask whether the item is genuine handwoven.
+              </div>
+            </div>
+          </dl>
+        </div>
+
+        <div class="price-card">
+          <dl>
+            <dt>Small ceramic item</dt>
+            <div>
+              <dd><strong>Typical item:</strong> Cup, bowl or lamp</dd>
+              <dd><span class="price-range-badge">250–900 local currency units</span></dd>
+            </div>
+            <div>
+              <div class="price-advice-box">
+                <strong>What affects price:</strong> Firing, glaze, detail and breakage-safe packing.<br>
+                <strong>Advice:</strong> Ask whether the glaze is food-safe when relevant.
+              </div>
+            </div>
+          </dl>
+        </div>
+
+        <div class="price-card">
+          <dl>
+            <dt>Wooden carving</dt>
+            <div>
+              <dd><strong>Typical item:</strong> Small bird, box or utensil</dd>
+              <dd><span class="price-range-badge">500–2,000 local currency units</span></dd>
+            </div>
+            <div>
+              <div class="price-advice-box">
+                <strong>What affects price:</strong> Wood species, size, carving detail and finish.<br>
+                <strong>Advice:</strong> Ask about legal sourcing of the wood.
+              </div>
+            </div>
+          </dl>
+        </div>
+
+        <div class="price-card">
+          <dl>
+            <dt>Metal craft item</dt>
+            <div>
+              <dd><strong>Typical item:</strong> Bell, tray or small lamp</dd>
+              <dd><span class="price-range-badge">600–3,000 local currency units</span></dd>
+            </div>
+            <div>
+              <div class="price-advice-box">
+                <strong>What affects price:</strong> Metal weight, casting, engraving and polishing.<br>
+                <strong>Advice:</strong> Compare weight and workmanship, not only surface shine.
+              </div>
+            </div>
+          </dl>
+        </div>
+
+        <div class="price-card">
+          <dl>
+            <dt>Leather handicraft</dt>
+            <div>
+              <dd><strong>Typical item:</strong> Wallet, belt or notebook cover</dd>
+              <dd><span class="price-range-badge">700–2,800 local currency units</span></dd>
+            </div>
+            <div>
+              <div class="price-advice-box">
+                <strong>What affects price:</strong> Leather grade, lining, stitching and hardware.<br>
+                <strong>Advice:</strong> Inspect the edges and ask how the leather was tanned and treated.
+              </div>
+            </div>
+          </dl>
+        </div>
+      </div>
+
+      <div class="price-note">
+        <small><strong>Benchmark Disclaimer:</strong> Prices are indicative guidelines and may vary depending on raw materials, individual craftsmanship, piece dimensions and geographic retail location.</small>
+      </div>
+    </section>
+
+    <!-- Section 6: Visitor Tips (Aside Landmark) -->
+    <aside aria-labelledby="tips-heading">
+      <h2 id="tips-heading">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><line x1="12" y1="16" x2="12" y2="12"/><line x1="12" y1="8" x2="12.01" y2="8"/></svg>
+        <span>Curator's Field Tips for Visitors</span>
+      </h2>
+      <ul>
+        <li>Ask openly about the craft's geographic origin and makers.</li>
+        <li>Check whether a claimed <abbr title="Geographical Indication">GI</abbr> tag has official documentation.</li>
+        <li>Compare prices and details between two or three sellers before purchasing.</li>
+        <li>Ask specifically whether the piece is handmade or mass factory-produced.</li>
+        <li>Request a verified receipt or cooperative certificate when appropriate.</li>
+      </ul>
+    </aside>
+
+    <!-- Section 7: Search and Filter Guide -->
+    <section id="search" class="search-section" aria-labelledby="search-heading">
+      <span class="eyebrow">Interactive Catalog Tool</span>
+      <h2 id="search-heading">Search the Guide</h2>
+      <p class="section-lead">Filter the category and featured craft entries by title, region, or making process.</p>
+      
+      <form id="guide-form">
+        <p>
+          <label for="craft-search">Craft keyword or material</label>
+          <input type="search" id="craft-search" name="craft-search" placeholder="e.g. pottery, handloom, neem">
+        </p>
+        <p>
+          <label for="craft-category">Craft Category</label>
+          <select id="craft-category" name="craft-category">
+            <option value="all">All categories</option>
+            <option value="textiles">Handloom Textiles</option>
+            <option value="ceramics">Ceramic Pottery</option>
+            <option value="wood">Wood Carvings</option>
+            <option value="metal">Metal Craft</option>
+            <option value="leather">Leather Goods</option>
+          </select>
+        </p>
+        <button type="submit">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+          <span>Apply filter</span>
+        </button>
+        <button type="reset">
+          <span>Clear</span>
+        </button>
+        <p id="form-message" role="status" aria-live="polite">Showing all 8 guide entries.</p>
+      </form>
+    </section>
+
+    <!-- Section 8: About This Guide -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="about-card">
+        <span class="about-badge">Academic Project Demonstration</span>
+        <h2 id="about-heading">About this guide</h2>
+        <p>This student-built demonstration focuses on clean semantic structure, accessible controls and practical buying advice. Addresses, prices, GI references and directory names marked as <em>sample listing</em> are placeholders and should be verified with an official tourism office, craft council or the artisan before use.</p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Main Landmark: Footer -->
+  <footer>
+    <div class="footer-container">
+      <div>
+        <h2>Local Craft Guide</h2>
+        <p>A student project committed to celebrating authentic handmade traditions, supporting local artisan communities, and promoting transparent souvenir benchmarks.</p>
+        <address>
+          <strong>Contact Information:</strong><br>
+          Email: <a href="mailto:guide@example.com">guide@example.com</a><br>
+          Visitor information desk: Sampletown Cultural Market
+        </address>
+      </div>
+      <div>
+        <h3>Quick Navigation</h3>
+        <nav aria-label="Footer navigation">
+          <ul>
+            <li><a href="#home">Home</a></li>
+            <li><a href="#categories">Craft Categories</a></li>
+            <li><a href="#featured">Featured Crafts</a></li>
+            <li><a href="#workshops">Artisan Workshops</a></li>
+            <li><a href="#prices">Fair Prices</a></li>
+            <li><a href="#about">About</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <small>&copy; 2026 Local Craft Guide. Demonstration content for educational project submission.</small>
+      <small>Crafted with Semantic HTML5, Vanilla CSS &amp; JavaScript.</small>
+    </div>
+  </footer>
+
+  <!-- Vanilla JavaScript Filtering Logic (Clean, Standard & Fully Accessible) -->
+  <script>
+    const form = document.getElementById('guide-form');
+    const search = document.getElementById('craft-search');
+    const category = document.getElementById('craft-category');
+    const message = document.getElementById('form-message');
+    const entries = document.querySelectorAll('#categories article, #featured article');
+
+    function applyFilter(event) {
+      if (event) event.preventDefault();
+      const term = search.value.trim().toLowerCase();
+      const selected = category.value;
+      let visible = 0;
+
+      entries.forEach((entry) => {
+        const matchesText = !term || entry.textContent.toLowerCase().includes(term);
+        const matchesCategory = selected === 'all' || entry.dataset.category === selected;
+        const show = matchesText && matchesCategory;
+
+        entry.classList.toggle('hidden', !show);
+        if (show) visible += 1;
+      });
+
+      message.textContent = visible + (visible === 1 ? ' guide entry' : ' guide entries') + ' shown.';
+    }
+
+    form.addEventListener('submit', applyFilter);
+    search.addEventListener('input', applyFilter);
+    category.addEventListener('change', applyFilter);
+
+    form.addEventListener('reset', () => {
+      window.setTimeout(() => {
+        entries.forEach((entry) => entry.classList.remove('hidden'));
+        message.textContent = 'Showing all ' + entries.length + ' guide entries.';
+      }, 0);
+    });
+
+    // Initialize with exact count
+    message.textContent = 'Showing all ' + entries.length + ' guide entries.';
+  </script>
+</body>
+</html>
